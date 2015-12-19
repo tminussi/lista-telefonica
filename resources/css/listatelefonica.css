@@ -1,0 +1,38 @@
+body {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 600px;
+}
+.jumbotron {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    text-align: center;
+    border-radius: 10px;
+}
+h2 {
+    text-align: center;
+    margin-top: 20px;
+}
+.form-center {
+    width: 400px;
+}
+.btn {
+    margin-top: 5px;
+}
+.selecionado {
+    background-color: coral;
+}
+
+footer {
+    margin-left: 100px;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#form-novo {
+    margin-left: auto;
+    margin-right: auto;
+}
