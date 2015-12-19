@@ -40,19 +40,10 @@
     <script src="resources/angular/i18n/angular-locale_pt-br.js"></script>
     <script>
         angular.module("listaTelefonica", []);
-        angular.module("listaTelefonica").controller("listaTelefonicaController", function($scope) {
+        angular.module("listaTelefonica").controller("listaTelefonicaController", function($scope, $http) {
             $scope.message = "Lista Telefonica";
-            $scope.contatos = [
-                { nome: "Thales", telefone: "(11) 9 6493-6784", selecionado: false, operadora: {nome: "Vivo"}, data: new Date() }, 
-                { nome: "Mariana", telefone: "(11) 9 7378-7727", selecionado: false, operadora: {nome: "Vivo"}, data: new Date() }, 
-                { nome: "Gustavo", telefone: "(11) 9 9999-9999", selecionado: false, operadora: {nome: "Tim"}, data: new Date() }, 
-            ];
-            $scope.operadoras = [
-                {nome: "Vivo", precoPorMinuto: 2  },
-                {nome: "TIM", precoPorMinuto: 2.5},
-                {nome: "Claro", precoPorMinuto: 2.2},
-                {nome: "Oi", precoPorMinuto: 2.1}
-            ];
+            $scope.contatos = [];
+            $scope.operadoras = [];
             $scope.addContact = function(contato) {
                 $scope.contatos.push(contato);
                 delete $scope.contato;
@@ -70,10 +61,24 @@
                    return contato.selecionado; 
                 });
             };
+            
             $scope.ordenarPor = function(ordenarPor) {
                $scope.criterioDeOrdenacao = ordenarPor;
                $scope.ordem = !$scope.ordem;
             };
+            var carregarOperadoras = function() {
+                $http.get("http://localhost:8080/lista-telefonica/operadoras").success(function(data) {
+                   $scope.operadoras = data; 
+                });
+            };
+            
+            var carregarContatos = function() {
+                $http.get("http://localhost:8080/lista-telefonica/contatos").success(function(data) {
+                   $scope.contatos = data; 
+                });
+            }
+            carregarOperadoras();
+            carregarContatos();
         });
 
     </script>
